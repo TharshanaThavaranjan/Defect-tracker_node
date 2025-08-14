@@ -6,10 +6,7 @@ module.exports = {
       { designation: 'Software Engineer' },
       { designation: 'Senior Software Engineer' },
       { designation: 'QA Engineer' },
-      { designation: 'Project Manager' },
-      { designation: 'Team Lead' },
-      { designation: 'DevOps Engineer' },
-      { designation: 'Business Analyst' }
+      { designation: 'Project Manager' }
     ]);
   },
 
@@ -19,10 +16,7 @@ module.exports = {
         'Software Engineer',
         'Senior Software Engineer',
         'QA Engineer',
-        'Project Manager',
-        'Team Lead',
-        'DevOps Engineer',
-        'Business Analyst'
+        'Project Manager'
       ]
     });
   }

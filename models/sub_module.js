@@ -20,15 +20,15 @@ const sub_module = sequelize.define('sub_module ', {
         type: DataTypes.STRING,
         allowNull: false,
       },
-
-      modules_id:{
-          type: DataTypes.BIGINT,
-          references: {
-              model:'modules',
-              key:'id'
-          },
-          allowNull: false
-     },
+    
+  //   modules_id:{
+  //       type: DataTypes.BIGINT,
+  //       references: {
+  //           model:'modules',
+  //           key:'id'
+  //       },
+  //       allowNull: false
+  //  }, 
         
 }, {
   tableName: 'sub_module',   // Explicit table name

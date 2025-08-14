@@ -19,46 +19,26 @@ const TestCase = sequelize.define('test_case', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  type_id: {
-    type: DataTypes.BIGINT,
-    allowNull: false,
-    references: {
-      model: 'defect_type',
-      key: 'id'
-    }
-  },
-  module_id: {
-    type: DataTypes.BIGINT,
-    allowNull: false,
-    references: {
-      model: 'modules',
-      key: 'id'
-    }
-  },
-  project_id: {
-    type: DataTypes.BIGINT,
-    allowNull: false,
-    references: {
-      model: 'project',
-      key: 'id'
-    }
-  },
-  severity_id: {
-    type: DataTypes.BIGINT,
-    allowNull: false,
-    references: {
-      model: 'severity',
-      key: 'id'
-    }
-  },
-  sub_module_id: {
-    type: DataTypes.BIGINT,
-    allowNull: false,
-    references: {
-      model: 'sub_module',
-      key: 'id'
-    }
-  },
+//   type_id: {
+//     type: DataTypes.BIGINT,
+//     allowNull: false,
+//   },
+//   module_id: {
+//     type: DataTypes.BIGINT,
+//     allowNull: false,
+//   },
+//   project_id: {
+//     type: DataTypes.BIGINT,
+//     allowNull: false,
+//   },
+//   severity_id: {
+//     type: DataTypes.BIGINT,
+//     allowNull: false,
+//   },
+//   sub_module_id: {
+//     type: DataTypes.BIGINT,
+//     allowNull: false,
+//   },
 }, {
   tableName: 'test_case',
   timestamps: false
