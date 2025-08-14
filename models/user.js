@@ -43,14 +43,14 @@ const user = sequelize.define('user', {
         type: DataTypes.ENUM('active','inactive'),
         defaultValue:'active'
    },
-//    designation_id:{
-//         type: DataTypes.BIGINT,
-//         references: {
-//             model:'designation',
-//             key:'id'
-//         },
-//         allowNull: true
-//    },   
+   designation_id:{
+        type: DataTypes.BIGINT,
+        references: {
+            model:'designation',
+            key:'id'
+        },
+        allowNull: true
+   }
 }, {
   tableName: 'user',   // Explicit table name
   timestamps: false        // Disable createdAt and updatedAt

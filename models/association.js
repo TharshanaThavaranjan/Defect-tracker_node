@@ -8,7 +8,7 @@ const submodule = require('./sub_module');
 const AllocateModule = require('./allocate_module');
 const ProjectAllocation = require('./project_allocation');
 const Role = require('./role');
-const release = require('./releases');
+const release = require('./release');
 const ReleaseType = require('./release_type');
 const TestCase = require('./test_case');
 const Severity = require('./severity');
@@ -59,10 +59,10 @@ project.hasMany(Module,{
 
 //submodule
 submodule.belongsTo(Module, {
-  foreignKey: 'module_id',
+  foreignKey: 'modules_id',
 });
 Module.hasMany(submodule,{
-   foreignKey:'module_id',
+   foreignKey:'modules_id',
 });
 
 //projectAllocation
@@ -134,8 +134,8 @@ TestCase.belongsTo(project, {
 project.hasMany(TestCase,{
     foreignKey:'project_id',
 });
-TestCase.belongsTo(Module, { 
-     foreignKey: 'module_id', 
+TestCase.belongsTo(Module, {
+     foreignKey: 'module_id',
 });
 Module.hasMany(TestCase,{
     foreignKey:'module_id',

@@ -34,12 +34,11 @@ const app = express();
 // import the sequelize database from db.js file
 const sequelize = require('./db');
 
-require('./models/designation'); 
+require('./models/designation');
 require('./models/user');
-// require('./models/employee');
-require('./models/role'); 
+require('./models/role');
 require('./models/priority');
-require('./models/defect_type'); 
+require('./models/defect_type');
 require('./models/severity');
 require('./models/defect_status');
 require('./models/release_type');
@@ -47,29 +46,27 @@ require('./models/privilege');
 require('./models/project');
 require('./models/smtp_config');
 require('./models/modules');
-require('./models/email_user')
-require('./models/bench');
-require('./models/user_privilege');
-require('./models/group_privilege');
-require('./models/project_user_privilege');
-require('./models/project_allocation');
 require('./models/sub_module');
+require('./models/bench');
+require('./models/allocate_module');
+require('./models/project_allocation');
 require('./models/project_allocation_history');
-require('./models/releases')
-require('./models/release_testcase');
+require('./models/release');
+require('./models/release_test_case');
+require('./models/test_case');
 require('./models/defect');
 require('./models/defect_history');
 require('./models/comments');
-require('./models/association')
+require('./models/email_user');
+require('./models/user_privilege');
+require('./models/group_privilege');
+require('./models/project_user_privilege');
+require('./models/association');
 
 app.get('/', async (req, res) => {
   try {
     await sequelize.authenticate();
-    // Disable foreign key checks before dropping tables
-    await sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
-    await sequelize.sync({ force: true }); // Force table creation (DROPS and recreates all tables!)
-    await sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
-    res.send('Database connected successfully (tables recreated)');
+    res.send('Database connected successfully');
   } catch (error) {
     res.status(500).send('Connection failed: ' + error.message);
   }
