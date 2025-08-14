@@ -33,12 +33,14 @@ require('./models/association');
 
 // Import routes
 const designationRoutes = require('./routes/designationRoutes');
+const projectRoutes = require('./routes/projectRoutes');
 
 // Middleware to parse JSON bodies
 app.use(express.json());
 
 // Mount API routes
 app.use('/api/designations', designationRoutes);
+app.use('/api/projects', projectRoutes);
 
 // Default route shows DB connection status
 app.get('/', async (req, res) => {

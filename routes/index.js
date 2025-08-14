@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-// Import designation routes
+// Import routes
 const designationRoutes = require('./designationRoutes');
+const projectRoutes = require('./projectRoutes');
 
-// Mount designation routes
+// Mount routes
 router.use('/designations', designationRoutes);
+router.use('/projects', projectRoutes);
 
 // Health check endpoint
 router.get('/health', (req, res) => {
@@ -14,7 +16,8 @@ router.get('/health', (req, res) => {
         message: 'API is running successfully',
         timestamp: new Date().toISOString(),
         endpoints: {
-            designations: '/api/designations'
+            designations: '/api/designations',
+            projects: '/api/projects'
         }
     });
 });
@@ -23,9 +26,9 @@ router.get('/health', (req, res) => {
 router.get('/docs', (req, res) => {
     res.status(200).json({
         success: true,
-        message: 'Designation API Documentation',
+        message: 'API Documentation',
         version: '1.0.0',
-        description: 'Complete CRUD API for designation table',
+        description: 'Complete CRUD API for designation and project tables',
         baseUrl: '/api',
         endpoints: {
             'GET /designations': 'Get all designations',
