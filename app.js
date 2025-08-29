@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const sequelize = require('./db');
+const dashboardRepository = require('./dashboard/dashboardRepository');
 
 // Import all models
 require('./models/designation');
@@ -35,6 +36,8 @@ require('./models/association');
 const designationRoutes = require('./routes/designationRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 const defectRoutes = require('./routes/defectRoutes');
+const defectSeverityRoutes = require('./routes/defectSeverityRoutes');
+const defectRemarkRoutes = require('./routes/defectRemarkRoutes');
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -43,6 +46,40 @@ app.use(express.json());
 app.use('/api/designations', designationRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/defects', defectRoutes);
+app.use('/api', defectSeverityRoutes);
+app.use('/api', defectRemarkRoutes);
+
+app.get('/api/dashboard/defect-density/:projectId', async (req, res) => {
+  try {
+    const projectId = req.params.projectId;
+    const kloc = await dashboardRepository.getProjectKLOC(projectId);
+    const totalDefects = await dashboardRepository.getTotalDefects(projectId);
+    const duplicateDefects = await dashboardRepository.getDefectCountByStatus(projectId, 'Duplicate');
+    const rejectedDefects = await dashboardRepository.getDefectCountByStatus(projectId, 'Rejected');
+    const validDefects = totalDefects - (duplicateDefects + rejectedDefects);
+    const defectDensity = kloc > 0 ? validDefects / kloc : 0;
+
+    let color = 'green';
+    if (defectDensity > 10) color = 'red';
+    else if (defectDensity > 7) color = 'yellow';
+
+    res.json({
+      success: true,
+      defectDensity,
+      color,
+      validDefects,
+      kloc,
+      totalDefects,
+      duplicateDefects,
+      rejectedDefects
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
 
 // Default route shows DB connection status
 app.get('/', async (req, res) => {
@@ -65,7 +102,7 @@ sequelize.authenticate()
   .then(() => {
     console.log('All models synced.');
     app.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
+      console.log(`Server running on http://192.168.1.120:${PORT}`);
     });
   })
   .catch(err => {
